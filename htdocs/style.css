@@ -1,0 +1,48 @@
+body {
+  background-color: #FFF;
+  color: #000;
+  font-family: sans-serif;
+  font-size: 0.8em;
+}
+section {
+  padding: 0 1em 1em 1em;
+}
+fieldset {
+  border: 1px dotted #333;
+}
+fieldset input[type=text] {
+  width: 70%;
+  margin: 0;
+}
+fieldset button {
+  width: 29%;
+  margin: 0;
+}
+#options {
+  font-size: 0.6em;
+  padding: 1em;
+  line-height: 0.8em;
+  vertical-align: middle;
+}
+#options input {
+  height: 0.6em;
+}
+textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px dotted #333;
+  background-color: #CCC;
+  padding: 1em;
+  min-height: 10em;
+}
+
+#message {
+  border: 1px solid #F00;
+  background-color: #F99;
+  padding: 1em;
+  margin: 1em;
+}
+
+
+
