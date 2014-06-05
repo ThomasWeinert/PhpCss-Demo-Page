@@ -35,18 +35,25 @@ try {
   <section id="form">
     <h1>Convert CSS 3 Selectors to Xpath</h1>
     <p>
-      This is a little demonstration of the <a href="https://github.com/ThomasWeinert/PhpCss">PhpCss library</a>. It parses CSS 3 selectors and
-      converts them to Xpath expression. It has full support for CSS 3 except for selectors
-      that depend on user interaction (:hover) do not return a node (:first-line).
+      This is a little demonstration for the <a href="https://github.com/ThomasWeinert/PhpCss">PhpCss library</a>.
+      It parses CSS 3 selectors and converts them to Xpath expression. It has full support for CSS 3
+      except for selectors that depend on user interaction (:hover) or do not return a node (:first-line).
     </p>
     <p>
       The target of this library is to create working expressions for any CSS selector.
       The expressions are not optimized in any way. Creating them manually will result
       in expressions that are a lot easier to read.
     </p>
+    <p>
+      <h3>Examples:</h3>
+      <ul>
+        <li><a href="?selector=table%23data+tr%3Anth-of-type%282n%2B3%29%3Anot%28.subheader%29&options[1]=1&options[4]=4">table#data tr:nth-of-type(2n+3):not(.subheader)</a></li>
+        <li><a href="?selector=atom|entry+>+atom|link[rel%3Dalternate][type%3D&quot;text%2Fhtml&quot;]">atom|entry > atom|link[rel=alternate][type="text/html"]</a></li>
+      </ul>
+    </p>
     <form action="./" method="get">
       <fieldset>
-        <input type="text" name="selector" value="<?php echo htmlspecialchars($selector); ?>">
+        <input type="text" name="selector" placeholder="CSS 3 Selector" value="<?php echo htmlspecialchars($selector); ?>">
         <button type="submit">Convert</button>
         <div id="options">
           <?php

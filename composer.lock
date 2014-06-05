@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6335f5585dea3681130aff7ce98e55a1",
+    "hash": "87f7c3bf4c537e0e3ed15323e07bde57",
     "packages": [
         {
             "name": "carica/phpcss",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThomasWeinert/PhpCss.git",
-                "reference": "523aee7517e948d746b647c22eafea0a03c95d5a"
+                "reference": "1d183a70d9a3cf118d2e4d0df6b3f0b8becef992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThomasWeinert/PhpCss/zipball/523aee7517e948d746b647c22eafea0a03c95d5a",
-                "reference": "523aee7517e948d746b647c22eafea0a03c95d5a",
+                "url": "https://api.github.com/repos/ThomasWeinert/PhpCss/zipball/1d183a70d9a3cf118d2e4d0df6b3f0b8becef992",
+                "reference": "1d183a70d9a3cf118d2e4d0df6b3f0b8becef992",
                 "shasum": ""
             },
             "require": {
@@ -42,7 +42,7 @@
                 }
             ],
             "description": "An css selector parser and converter",
-            "time": "2014-05-25 11:24:30"
+            "time": "2014-05-30 17:52:33"
         }
     ],
     "packages-dev": [
