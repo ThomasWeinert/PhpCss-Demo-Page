@@ -36,7 +36,7 @@ try {
     <h1>Convert CSS 3 Selectors to Xpath</h1>
     <p>
       This is a little demonstration for the <a href="https://github.com/ThomasWeinert/PhpCss">PhpCss library</a>.
-      It parses CSS 3 selectors and converts them to Xpath expression. It has full support for CSS 3
+      It parses CSS 3 selectors and converts them into Xpath expressions. It has full support for CSS 3,
       except for selectors that depend on user interaction (:hover) or do not return a node (:first-line).
     </p>
     <p>
@@ -87,6 +87,7 @@ try {
   <section id="expression">
     <textarea><?php echo htmlspecialchars($expression); ?></textarea>
   </section>
+  <a href="https://github.com/ThomasWeinert/PhpCss"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
