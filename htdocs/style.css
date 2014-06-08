@@ -57,7 +57,7 @@ textarea {
   border: 1px solid #F00;
   background-color: #ffcece;
   padding: 1em;
-  margin: 1em 0;
+  margin: 1em auto;
 }
 
 #message .selector {
