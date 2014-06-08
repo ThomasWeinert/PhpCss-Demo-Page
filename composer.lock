@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThomasWeinert/PhpCss.git",
-                "reference": "1d183a70d9a3cf118d2e4d0df6b3f0b8becef992"
+                "reference": "6b1cd6930053094274d15628b6fc02dc6c953902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThomasWeinert/PhpCss/zipball/1d183a70d9a3cf118d2e4d0df6b3f0b8becef992",
-                "reference": "1d183a70d9a3cf118d2e4d0df6b3f0b8becef992",
+                "url": "https://api.github.com/repos/ThomasWeinert/PhpCss/zipball/6b1cd6930053094274d15628b6fc02dc6c953902",
+                "reference": "6b1cd6930053094274d15628b6fc02dc6c953902",
                 "shasum": ""
             },
             "require": {
@@ -42,7 +42,7 @@
                 }
             ],
             "description": "An css selector parser and converter",
-            "time": "2014-05-30 17:52:33"
+            "time": "2014-06-08 11:31:07"
         }
     ],
     "packages-dev": [

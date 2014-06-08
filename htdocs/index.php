@@ -1,5 +1,7 @@
 <?php
+  error_reporting(E_ALL);
   header("Expires: ".date(DATE_ISO8601, time() + 86400 * 7));
+  header("Content-Type: text/html; charset=utf-8");
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,11 +26,11 @@ if (isset($_GET['options']) && is_array($_GET['options'])) {
     $bitmask |= $bit;
   }
 }
+$error = NULL;
 try {
   $expression = PhpCss::toXpath($selector, $bitmask);
 } catch (Exception $e) {
-  $messageTitle = get_class($e);
-  $messageText = $e->getMessage();
+  $error = $e;
 }
 ?>
 <body>
@@ -75,11 +77,38 @@ try {
     </form>
   </section>
   <?php
-     if (!empty($messageTitle)) {
+     if (!empty($error)) {
   ?>
   <section id="message">
-    <h2><?php echo htmlspecialchars($messageTitle); ?></h2>
-    <p><?php echo htmlspecialchars($messageText); ?></p>
+    <h2><?php echo htmlspecialchars(get_class($error)); ?></h2>
+    <p><?php echo htmlspecialchars($error->getMessage()); ?></p>
+    <?php
+      $showError = FALSE;
+      if ($error instanceof PhpCss\Exception\InvalidCharacter) {
+        $showError = TRUE;
+        $before = substr($error->getBuffer(), 0, $error->getOffset());
+        $char = $error->getChar();
+        $after = substr($error->getBuffer(), $error->getOffset() + strlen($char));
+      } elseif ($error instanceof PhpCss\Exception\Token) {
+        $showError = TRUE;
+        $token = $error->getToken();
+        $before = substr($selector, 0, $token->position);
+        $char = $token->content;
+        $after = substr($selector, $token->position + $token->length);
+      }
+
+      if ($showError) {
+        echo '<div class="selector">';
+        if (!empty($before)) {
+          echo '<span>'.htmlspecialchars($before).'</span>';
+        }
+        echo '<span class="error">'.htmlspecialchars($char).'</span>';
+        if (!empty($after)) {
+          echo '<span>'.htmlspecialchars($after).'</span>';
+        }
+        echo '</div>';
+      }
+    ?>
   </section>
   <?php
      }

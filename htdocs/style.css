@@ -55,10 +55,25 @@ textarea {
 
 #message {
   border: 1px solid #F00;
-  background-color: #F99;
+  background-color: #ffcece;
   padding: 1em;
-  margin: 1em;
+  margin: 1em 0;
 }
+
+#message .selector {
+  border: 1px solid #F00;
+  white-space: nowrap;
+  color: #FFF;
+  background-color: #000000;
+  font-family: monospace;
+  padding: 0.2em;
+  font-size: 2em;
+}
+
+#message .selector .error {
+  color: #F00;
+}
+
 
 
 
