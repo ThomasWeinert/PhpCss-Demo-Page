@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="papaya Project" default="build">
+
+  <property name="directory.export" value="./build" override="true" />
+  <property name="directory.src" value="${project.basedir}" override="true" />
+
+  <property name="mode.writeable" value="0777" override="true"/>
+
+  <property name="executable.composer" value="composer" override="true" />
+
+  <tstamp prefix="time"/>
+  <property name="time.current" value="${time.DSTAMP}T${time.TSTAMP}"/>
+
+  <fileset id="public" dir="${directory.src}/htdocs">
+    <include name="**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.git/**"/>
+  </fileset>
+
+  <fileset id="dependencies" dir="${directory.src}">
+    <include name="composer.json"/>
+    <include name="composer.lock"/>
+  </fileset>
+
+  <fileset id="archives" dir="${directory.export}">
+    <include name="*.tar.gz"/>
+    <include name="*.zip"/>
+  </fileset>
+
+  <target name="build" depends="composer" description="Install/Configure"/>
+
+  <!--
+    Install composer dependencies
+   -->
+  <target name="composer" description="Install dependecies">
+    <exec executable="${executable.composer}" passthru="true">
+      <arg value="-n"/>
+      <arg value="install"/>
+    </exec>
+  </target>
+
+  <!--
+    Update composer dependencies
+   -->
+  <target name="composer-update" description="Update dependecies">
+    <exec executable="${executable.composer}" passthru="true">
+      <arg value="-n"/>
+      <arg value="update"/>
+    </exec>
+  </target>
+
+  <!--
+    Generate distribution export directories (Copy files)
+  -->
+  <target name="export" depends="clean-build" description="Export distribution">
+    <echo message="Prepare export directory" />
+    <mkdir dir="${directory.export}/source" />
+    <echo message="Copy files" />
+    <copy todir="${directory.export}/source/htdocs">
+      <fileset refid="public"/>
+    </copy>
+    <copy todir="${directory.export}/source">
+      <fileset refid="dependencies"/>
+    </copy>
+    <echo message="Run composer --no-interaction --no-dev install"/>
+    <exec executable="${executable.composer}" passthru="true">
+      <arg value="install"/>
+      <arg value="--no-interaction"/>
+      <arg value="--no-dev"/>
+      <arg value="--prefer-dist"/>
+      <arg value="--working-dir"/>
+      <arg path="${directory.export}/source"/>
+    </exec>
+    <delete dir="${directory.export}/source/vendor/carica/phpcss/.git" failonerror="false"/>
+  </target>
+  <!--
+    Generate tag.gz archive
+  -->
+  <target name="tgz" depends="export" description="Creating tar.gz archive">
+    <tar destfile="${directory.export}/latest.tar.gz" compression="gzip">
+      <fileset dir="${directory.export}/source">
+        <include name="*" />
+      </fileset>
+    </tar>
+    <copy
+      file="${directory.export}/latest.tar.gz"
+      tofile="${directory.export}/build${time.current}.tar.gz">
+    </copy>
+  </target>
+
+  <!--
+    Generate zip archive
+  -->
+  <target name="zip" depends="export" description="Creating zip archive">
+    <zip destfile="${directory.export}/latest.zip">
+      <fileset dir="${directory.export}/source">
+        <include name="*" />
+      </fileset>
+    </zip>
+    <copy
+      file="${directory.export}/latest.zip"
+      tofile="${directory.export}/build${time.current}.zip">
+    </copy>
+  </target>
+
+  <target name="clean-build" description="Remove build data">
+    <delete dir="${directory.export}/source"/>
+  </target>
+
+  <target name="clean-archives" description="Remove exported archives">
+    <delete>
+      <fileset refid="archives"/>
+    </delete>
+  </target>
+
+</project>
