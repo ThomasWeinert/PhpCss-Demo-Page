@@ -116,7 +116,12 @@ try {
       $queryString = empty($_SERVER['QUERY_STRING']) ? '' : $_SERVER['QUERY_STRING'];
   ?>
   <section id="expression">
-    <a href="xml.php?<?php echo htmlspecialchars($queryString)?>"><button>XML</button></a>
+    <h2>CSS selector <a href="xml.php?<?php echo htmlspecialchars($queryString)?>"><button>XML</button></a>
+    </h2>
+    <?php
+      include(__DIR__.'/functions.inc.php');
+      echo getHtml($selector, $bitmask);
+    ?>
     <h2>Xpath expression</h2>
     <textarea><?php echo htmlspecialchars($expression); ?></textarea>
   </section>

@@ -74,6 +74,18 @@ textarea {
   color: #F00;
 }
 
+div.selector-group {
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 1.6em;
+  color: #444;
+}
+div.selector-group a {
+  color: #000;
+}
+div.selector-group a:hover {
+  color: #556DC7;
+}
 
 
 
