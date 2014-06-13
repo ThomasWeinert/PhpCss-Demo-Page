@@ -6,7 +6,7 @@ body {
   padding: 2em;
 }
 a, a:visited {
-  color: #556DC7;
+  color: #5269C0;
   font-weight: bolder;
   text-decoration: none;
 }
@@ -79,12 +79,6 @@ div.selector-group {
   font-family: monospace;
   font-size: 1.6em;
   color: #444;
-}
-div.selector-group a {
-  color: #000;
-}
-div.selector-group a:hover {
-  color: #556DC7;
 }
 
 
