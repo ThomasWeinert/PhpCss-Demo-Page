@@ -60,29 +60,59 @@
     </a>
   </xsl:template>
 
-  <xsl:template match="css:pseudoclass[css:parameter]">
-    <span>
-      <a
-        title="Pseudo-Class"
-        class="pseudoclass"
-        href="http://www.w3.org/TR/css3-selectors/#pseudo-classes"
-        target="_blank">
-        <xsl:apply-templates select="css:name/node()" />
-      </a>
-      <xsl:text>(</xsl:text>
-        <xsl:apply-templates select="css:parameter/node()" />
-      <xsl:text>)</xsl:text>
-    </span>
+  <xsl:template match="css:pseudoclass" name="pseudoclass">
+    <xsl:param name="selector" select="."/>
+    <xsl:param name="title">Pseudo-Class</xsl:param>
+    <xsl:param name="class">pseudolass</xsl:param>
+    <xsl:param name="href">http://www.w3.org/TR/css3-selectors/#pseudo-classes</xsl:param>
+    <xsl:choose>
+      <xsl:when test="$selector/css:parameter">
+        <span>
+          <a title="{$title}" class="{$class}" href="{$href}" target="_blank">
+            <xsl:apply-templates select="$selector/css:name/node()" />
+          </a>
+          <xsl:text>(</xsl:text>
+            <xsl:apply-templates select="$selector/css:parameter/node()" />
+          <xsl:text>)</xsl:text>
+        </span>
+      </xsl:when>
+      <xsl:otherwise>
+        <a title="{$title}" class="{$class}" href="{$href}" target="_blank">
+          <xsl:apply-templates select="$selector/css:name/node()" />
+        </a>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="css:pseudoclass[not(css:parameter)]">
-    <a
-      title="Pseudo-Class"
-      class="pseudoclass"
-      href="http://www.w3.org/TR/css3-selectors/#pseudo-classes"
-      target="_blank">
-      <xsl:apply-templates select="css:name/node()" />
-    </a>
+  <xsl:template match="css:pseudoclass[css:name = ':not']">
+    <xsl:call-template name="pseudoclass">
+      <xsl:with-param name="selector" select="."/>
+      <xsl:with-param name="title">Negation Pseudo-Class</xsl:with-param>
+      <xsl:with-param name="class">pseudoclass negation</xsl:with-param>
+      <xsl:with-param name="href">http://www.w3.org/TR/css3-selectors/#negation</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="css:pseudoclass[css:name = ':lang']">
+    <xsl:call-template name="pseudoclass">
+      <xsl:with-param name="selector" select="."/>
+      <xsl:with-param name="title">Language Pseudo-Class</xsl:with-param>
+      <xsl:with-param name="class">pseudoclass language</xsl:with-param>
+      <xsl:with-param name="href">http://www.w3.org/TR/css3-selectors/#lang-pseudo</xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="css:pseudoclass[starts-with(css:name, ':nth-') or starts-with(css:name, ':first-') or starts-with(css:name, ':last-') or starts-with(css:name, ':only-')]">
+    <xsl:call-template name="pseudoclass">
+      <xsl:with-param name="selector" select="."/>
+      <xsl:with-param name="title">Structural Pseudo-Class</xsl:with-param>
+      <xsl:with-param name="class">pseudoclass nth</xsl:with-param>
+      <xsl:with-param name="href">
+        <xsl:text>http://www.w3.org/TR/css3-selectors/#</xsl:text>
+        <xsl:value-of select="substring-after(css:name, ':')"/>
+        <xsl:text>-pseudo</xsl:text>
+      </xsl:with-param>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="css:pseudoelement">
@@ -104,22 +134,6 @@
       <xsl:value-of select="./css:text"/>
     </a>
     <xsl:apply-templates select="css:selector/node()"/>
-  </xsl:template>
-
-
-  <xsl:template match="css:pseudoclass[css:name = ':not']">
-    <span>
-      <a
-        title="Negation Pseudo-Class"
-        class="pseudoclass negation"
-        href="http://www.w3.org/TR/css3-selectors/#negation"
-        target="_blank">
-        <xsl:apply-templates select="css:name/node()" />
-      </a>
-      <xsl:text>(</xsl:text>
-        <xsl:apply-templates select="css:parameter/node()" />
-      <xsl:text>)</xsl:text>
-    </span>
   </xsl:template>
 
 </xsl:stylesheet>
